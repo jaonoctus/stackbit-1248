@@ -1,5 +1,9 @@
 {
   "name": "stackbit-1248",
   "version": "1.0.0",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@types/jest": "^27.4.1",
+    "jest": "^27.5.1"
+  }
 }
