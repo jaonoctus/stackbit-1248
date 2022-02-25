@@ -5,4 +5,4 @@ insert_final_newline = true
 [*.{js,ts,json}]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
