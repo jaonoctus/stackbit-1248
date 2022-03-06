@@ -50,11 +50,11 @@ const encodeWordIndexToBits = wordIndex => {
 }
 
 const getWordFromNumber = wordNumber => {
-  if (!isIntegerNumberInRange(wordNumber, { min: 0, max: 2047 })) {
+  if (!isIntegerNumberInRange(wordNumber, { min: 1, max: 2048 })) {
     throw new Error('invalid wordIndex')
   }
 
-  return BIP39_WORD_LIST[wordNumber]
+  return getWordFromIndex(wordNumber - 1)
 }
 
 const getWordFromIndex = wordIndex => {
@@ -62,13 +62,7 @@ const getWordFromIndex = wordIndex => {
     throw new Error('invalid wordIndex')
   }
 
-  const word = BIP39_WORD_LIST[wordIndex]
-
-  if (word === undefined) {
-    throw new Error(`index ${wordIndex} is out of range (0-2047)`)
-  }
-
-  return word
+  return BIP39_WORD_LIST[wordIndex]
 }
 
 module.exports.decodeBitsToWordIndex = decodeBitsToWordIndex

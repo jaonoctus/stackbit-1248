@@ -1,9 +1,10 @@
 const {
   decodeBitsToWordIndex,
   decodeBitsToWordNumber,
-  getWordFromIndex,
-  encodeWordNumberToBits,
   encodeWordIndexToBits,
+  encodeWordNumberToBits,
+  getWordFromIndex,
+  getWordFromNumber,
 } = require('../src/index.js')
 
 //  1   2   4   8
@@ -135,6 +136,12 @@ describe('Stackbit', () => {
       expect(getWordFromIndex(2047)).toEqual('zoo')
     })
 
+    it('Should return the correct BIP39 word given a number', () => {
+      expect(getWordFromNumber(1)).toEqual('abandon')
+      expect(getWordFromNumber(1248)).toEqual('orbit')
+      expect(getWordFromNumber(2048)).toEqual('zoo')
+    })
+
     it('Should throw an error if the index is out of range', () => {
       // indexes rage: 0-2047
       expect(() => {
@@ -145,6 +152,19 @@ describe('Stackbit', () => {
       }).toThrowError()
       expect(() => {
         getWordFromIndex(-1)
+      }).toThrowError()
+    })
+
+    it('Should throw an error if the number is out of range', () => {
+      // number rage: 1-2048
+      expect(() => {
+        getWordFromNumber(2049)
+      }).toThrowError()
+      expect(() => {
+        getWordFromNumber(9999)
+      }).toThrowError()
+      expect(() => {
+        getWordFromNumber(0)
       }).toThrowError()
     })
   })
