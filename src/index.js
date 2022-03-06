@@ -65,7 +65,7 @@ const getWordFromIndex = wordIndex => {
   const word = BIP39_WORD_LIST[wordIndex]
 
   if (word === undefined) {
-    throw new Error(`index ${index} is out of range (0-2047)`)
+    throw new Error(`index ${wordIndex} is out of range (0-2047)`)
   }
 
   return word
