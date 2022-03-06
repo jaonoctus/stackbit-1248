@@ -1,4 +1,5 @@
 const { isArraysEqual, zeroPad, isIntegerNumberInRange } = require('./utils')
+const { BIP39_WORD_LIST } = require('./BIP39WordList.js')
 
 const BIT_SET = [
   // 1, 2, 4, 8
@@ -29,17 +30,6 @@ const decodeBitsToWordIndex = (bits = []) => {
   return decodeBitsToWordNumber(bits) - 1
 }
 
-const getWordFromIndex = index => {
-  const { BIP39_WORD_LIST } = require('./BIP39WordList')
-  const word = BIP39_WORD_LIST[index]
-
-  if (word === undefined) {
-    throw new Error(`index ${index} is out of range (0-2047)`)
-  }
-
-  return word
-}
-
 const encodeWordNumberToBits = wordNumber => {
   if (!isIntegerNumberInRange(wordNumber, { min: 1, max: 2048 })) {
     throw new Error('invalid number')
@@ -59,8 +49,31 @@ const encodeWordIndexToBits = wordIndex => {
   return encodeWordNumberToBits(wordIndex + 1)
 }
 
+const getWordFromNumber = wordNumber => {
+  if (!isIntegerNumberInRange(wordNumber, { min: 0, max: 2047 })) {
+    throw new Error('invalid wordIndex')
+  }
+
+  return BIP39_WORD_LIST[wordNumber]
+}
+
+const getWordFromIndex = wordIndex => {
+  if (!isIntegerNumberInRange(wordIndex, { min: 0, max: 2047 })) {
+    throw new Error('invalid wordIndex')
+  }
+
+  const word = BIP39_WORD_LIST[wordIndex]
+
+  if (word === undefined) {
+    throw new Error(`index ${index} is out of range (0-2047)`)
+  }
+
+  return word
+}
+
 module.exports.decodeBitsToWordIndex = decodeBitsToWordIndex
 module.exports.decodeBitsToWordNumber = decodeBitsToWordNumber
+module.exports.encodeWordIndexToBits = encodeWordIndexToBits
 module.exports.encodeWordNumberToBits = encodeWordNumberToBits
 module.exports.getWordFromIndex = getWordFromIndex
-module.exports.encodeWordIndexToBits = encodeWordIndexToBits
+module.exports.getWordFromNumber = getWordFromNumber

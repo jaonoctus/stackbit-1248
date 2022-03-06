@@ -1,13 +1,21 @@
 {
   "name": "stackbit-1248",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "license": "MIT",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watchAll"
   },
-  "dependencies": {
+  "author": {
+    "name": "jaonoctus",
+    "email": "jaonoctus@protonmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/Stackbit-me/stackbit-1248"
+  },
+  "main": "src/index.js",
+  "devDependencies": {
     "@types/jest": "27.4.1",
     "jest": "27.5.1"
   }
